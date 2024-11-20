@@ -16,7 +16,6 @@ namespace TestWebBackEndDeveloper.Controllers
             _serviceUoW = unitOfWorkService;
         }
 
-
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

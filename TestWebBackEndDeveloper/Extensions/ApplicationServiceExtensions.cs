@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using TestWebBackEndDeveloper.Application.UnitOfWork;
 using TestWebBackEndDeveloper.Infrastracture.Connection;
@@ -24,7 +25,7 @@ namespace TestWebBackEndDeveloper.Application.Extensions
             );
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseMySQL(config.GetConnectionString("WebApiDatabase"));
+                opt.UseNpgsql(config.GetConnectionString("WebApiDatabase"));
             });
             services.AddCors(opt =>
             {

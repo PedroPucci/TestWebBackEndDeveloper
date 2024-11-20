@@ -1,4 +1,5 @@
-﻿using TestWebBackEndDeveloper.Application.Services.Interfaces;
+﻿using TestWebBackEndDeveloper.Application.ExtensionError;
+using TestWebBackEndDeveloper.Application.Services.Interfaces;
 using TestWebBackEndDeveloper.Domain.Entity;
 using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
 
@@ -13,7 +14,12 @@ namespace TestWebBackEndDeveloper.Application.Services
             _repositoryUoW = repositoryUoW;
         }
 
-        public Task<AccountUser> AddAccountUserAsync(AccountUser accountUser)
+        public Task<Result<AccountUser>> AddAccountUserAsync(AccountUser accountUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<AccountUser>> UpdateAccountUserAsync(AccountUser accountUser)
         {
             throw new NotImplementedException();
         }
@@ -24,11 +30,6 @@ namespace TestWebBackEndDeveloper.Application.Services
         }
 
         public Task<List<AccountUser>> GetAllAccountUsersAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<AccountUser> UpdateAccountUserAsync(AccountUser accountUser)
         {
             throw new NotImplementedException();
         }

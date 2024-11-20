@@ -13,7 +13,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
             Configuration = configuration;
         }
 
-        //Versao SQL Server
+        //SQL Server version
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    string connectionString = Configuration.GetConnectionString("WebApiDatabase");
@@ -21,7 +21,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
         //    optionsBuilder.UseMySql(connectionString, serverVersion);
         //}
 
-        //Versao Postgree
+        //Postgree version
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));

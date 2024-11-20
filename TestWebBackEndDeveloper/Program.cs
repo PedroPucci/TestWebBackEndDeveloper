@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TestWebBackEndDeveloper.Application.Extensions;
 using TestWebBackEndDeveloper.Extensions.ExtensionsLogs;
 using TestWebBackEndDeveloper.Infrastracture.Connection;
