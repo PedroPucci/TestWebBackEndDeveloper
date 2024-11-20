@@ -4,12 +4,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebBackEndDeveloper", "TestWebBackEndDeveloper\TestWebBackEndDeveloper.csproj", "{1581F8ED-2ED0-4FCB-A41A-BE7DA38BCF32}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1DA2D516-4B13-4070-9DEE-AD9B95629C44} = {1DA2D516-4B13-4070-9DEE-AD9B95629C44}
+		{FA103B40-9AB4-46A5-A5A2-7DF73AC2774E} = {FA103B40-9AB4-46A5-A5A2-7DF73AC2774E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebBackEndDeveloper.Application", "TestWebBackEndDeveloper.Application\TestWebBackEndDeveloper.Application.csproj", "{1DA2D516-4B13-4070-9DEE-AD9B95629C44}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D1DB9C7-CE02-4CA2-A3EB-CF59B6B0592A} = {3D1DB9C7-CE02-4CA2-A3EB-CF59B6B0592A}
+		{FA103B40-9AB4-46A5-A5A2-7DF73AC2774E} = {FA103B40-9AB4-46A5-A5A2-7DF73AC2774E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebBackEndDeveloper.Domain", "TestWebBackEndDeveloper.Domain\TestWebBackEndDeveloper.Domain.csproj", "{3D1DB9C7-CE02-4CA2-A3EB-CF59B6B0592A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebBackEndDeveloper.Infrastracture", "TestWebBackEndDeveloper.Infrastracture\TestWebBackEndDeveloper.Infrastracture.csproj", "{FA103B40-9AB4-46A5-A5A2-7DF73AC2774E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D1DB9C7-CE02-4CA2-A3EB-CF59B6B0592A} = {3D1DB9C7-CE02-4CA2-A3EB-CF59B6B0592A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
