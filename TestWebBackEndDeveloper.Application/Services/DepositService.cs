@@ -1,6 +1,9 @@
-﻿using TestWebBackEndDeveloper.Application.Services.Interfaces;
+﻿using Serilog;
+using TestWebBackEndDeveloper.Application.ExtensionError;
+using TestWebBackEndDeveloper.Application.Services.Interfaces;
 using TestWebBackEndDeveloper.Domain.Entity;
 using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
+using TestWebBackEndDeveloper.Shared.Validator;
 
 namespace TestWebBackEndDeveloper.Application.Services
 {
@@ -13,24 +16,53 @@ namespace TestWebBackEndDeveloper.Application.Services
             _repositoryUoW = repositoryUoW;
         }
 
-        public Task<Deposit> AddDepositAsync(Deposit deposit)
+        public async Task<Result<Deposit>> AddDepositAsync(Deposit deposit)
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                var isValidDeposit = await IsValidDepositRequest(deposit);
+
+                if (!isValidDeposit.Success)
+                {
+                    Log.Error("Message: Invalid inputs to Deposit");
+                    return Result<Deposit>.Error(isValidDeposit.Message);
+                }
+
+                deposit.Value = deposit.Value;
+                deposit.AccountId = deposit.AccountId;
+                deposit.ModificationDate = DateTime.UtcNow;
+                var result = await _repositoryUoW.DepositRepository.AddDepositAsync(deposit);
+
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+
+                return Result<Deposit>.Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Message: Error to add a new Deposit " + ex + "");
+                transaction.Rollback();
+                throw new InvalidOperationException("An error occurred");
+            }
+            finally
+            {
+                Log.Error("Message: Add with success Deposit");
+                transaction.Dispose();
+            }
         }
 
-        public Task DeleteDepositAsync(int depositId)
+        private async Task<Result<Deposit>> IsValidDepositRequest(Deposit deposit)
         {
-            throw new NotImplementedException();
-        }
+            var requestValidator = await new DepositRequestValidator().ValidateAsync(deposit);
+            if (!requestValidator.IsValid)
+            {
+                string errorMessage = string.Join(" ", requestValidator.Errors.Select(e => e.ErrorMessage));
+                errorMessage = errorMessage.Replace(Environment.NewLine, "");
+                return Result<Deposit>.Error(errorMessage);
+            }
 
-        public Task<List<Deposit>> GetAllDepositsAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Deposit> UpdateDepositAsync(Deposit deposit)
-        {
-            throw new NotImplementedException();
+            return Result<Deposit>.Ok();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Principal;
 using TestWebBackEndDeveloper.Application.UnitOfWork;
 using TestWebBackEndDeveloper.Domain.Entity;
 

@@ -13,24 +13,10 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
             _context = context;
         }
 
-        public Task<Deposit> AddDepositAsync(Deposit deposit)
+        public async Task<Deposit> AddDepositAsync(Deposit deposit)
         {
-            throw new NotImplementedException();
-        }
-
-        public Deposit DeleteDepositAsync(Deposit deposit)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Deposit>> GetAllDepositAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Deposit UpdateDepositAsync(Deposit deposit)
-        {
-            throw new NotImplementedException();
+            var result = await _context.Deposit.AddAsync(deposit);
+            return result.Entity;
         }
     }
 }

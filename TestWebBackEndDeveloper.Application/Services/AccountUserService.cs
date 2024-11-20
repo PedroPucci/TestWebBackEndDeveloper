@@ -3,8 +3,6 @@ using TestWebBackEndDeveloper.Application.ExtensionError;
 using TestWebBackEndDeveloper.Application.Services.Interfaces;
 using TestWebBackEndDeveloper.Domain.Entity;
 using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
-using TestWebBackEndDeveloper.Shared.Enums.Errors;
-using TestWebBackEndDeveloper.Shared.Helpers;
 using TestWebBackEndDeveloper.Shared.Validator;
 
 namespace TestWebBackEndDeveloper.Application.Services

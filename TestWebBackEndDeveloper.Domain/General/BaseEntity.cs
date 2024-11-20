@@ -1,10 +1,16 @@
-﻿namespace TestWebBackEndDeveloper.Domain.General
+﻿using System.Text.Json.Serialization;
+
+namespace TestWebBackEndDeveloper.Domain.General
 {
     public abstract class BaseEntity
     {
-        public int Id { get; private set; }
+        [JsonIgnore]
+        public int Id { get; set; }
 
-        public DateTime? CreateDate { get; private set; }
+        [JsonIgnore]
+        public DateTime? CreateDate { get; set; }
+
+        [JsonIgnore]
         public DateTime? ModificationDate { get; set; }
 
         protected BaseEntity()
