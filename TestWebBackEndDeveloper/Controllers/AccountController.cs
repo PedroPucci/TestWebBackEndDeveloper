@@ -21,6 +21,9 @@ namespace TestWebBackEndDeveloper.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddAccount([FromBody] AccountUser accountUser)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var result = await _serviceUoW.AccountService.AddAccountUserAsync(accountUser);
             return result.Success ? Ok(result) : BadRequest(result);
         }

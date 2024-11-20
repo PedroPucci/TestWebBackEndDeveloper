@@ -1,4 +1,5 @@
-﻿using TestWebBackEndDeveloper.Domain.General;
+﻿using System.Text.Json.Serialization;
+using TestWebBackEndDeveloper.Domain.General;
 
 namespace TestWebBackEndDeveloper.Domain.Entity
 {
@@ -7,7 +8,11 @@ namespace TestWebBackEndDeveloper.Domain.Entity
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
-        public ICollection<Deposit> Deposits { get; set; }
-        public Balance Balance { get; set; }
+
+        [JsonIgnore]
+        public Balance? Balance { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Deposit>? Deposits { get; set; }
     }
 }

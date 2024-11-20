@@ -21,7 +21,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
         //    optionsBuilder.UseMySql(connectionString, serverVersion);
         //}
 
-        //Postgree version
+        //Postgresql version
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
@@ -30,7 +30,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
         public DbSet<AccountUser> AccountUser { get; set; }
         public DbSet<Deposit> Deposit { get; set; }
         public DbSet<Balance> Balance { get; set; }
-
+                
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -38,11 +38,17 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
             modelBuilder.Entity<AccountUser>(entity =>
             {
                 entity.HasKey(a => a.Id);
-                entity.Property(a => a.Name);
-                entity.Property(a => a.Email);
-                entity.Property(a => a.Password);
+                entity.Property(a => a.Name).IsRequired(false);
+                entity.Property(a => a.Email).IsRequired(false);
+                entity.Property(a => a.Password).IsRequired(false);
                 entity.Property(a => a.CreateDate);
                 entity.Property(a => a.ModificationDate);
+
+                entity.HasOne(a => a.Balance)
+                      .WithOne(b => b.AccountUsers)
+                      .HasForeignKey<Balance>("AccountId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired(false);
             });
 
             modelBuilder.Entity<Deposit>(entity =>
@@ -51,11 +57,12 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
                 entity.Property(d => d.Value);
                 entity.Property(d => d.CreateDate);
                 entity.Property(d => d.ModificationDate);
-
+                
                 entity.HasOne(d => d.AccountUsers)
-                      .WithMany()
+                      .WithMany(a => a.Deposits)
                       .HasForeignKey("AccountId")
-                      .OnDelete(DeleteBehavior.Cascade);
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired(false);
             });
 
             modelBuilder.Entity<Balance>(entity =>
@@ -66,9 +73,10 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
                 entity.Property(b => b.ModificationDate);
 
                 entity.HasOne(b => b.AccountUsers)
-                      .WithOne()
+                      .WithOne(a => a.Balance)
                       .HasForeignKey<Balance>("AccountId")
-                      .OnDelete(DeleteBehavior.Cascade);
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired(false);
             });
         }
     }
