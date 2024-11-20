@@ -1,4 +1,6 @@
 ﻿using TestWebBackEndDeveloper.Application.Services.Interfaces;
+using TestWebBackEndDeveloper.Domain.Entity;
+using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
 
 namespace TestWebBackEndDeveloper.Application.Services
 {

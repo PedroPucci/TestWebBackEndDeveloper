@@ -1,11 +1,22 @@
+using TestWebBackEndDeveloper.Application.Extensions;
+using TestWebBackEndDeveloper.Extensions.ExtensionsLogs;
+using TestWebBackEndDeveloper.Infrastracture.Connection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationServices(builder.Configuration);
+
+// Inicialize o logger Serilog
+LogExtension.InitializeLogger();
+
+// Obtenha o logger configurado
+var loggerSerialLog = LogExtension.GetLogger();
+
+// Use o logger...
+loggerSerialLog.Information("Logging initialized.");
 
 var app = builder.Build();
 
@@ -16,10 +27,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+try
+{
+    var context = services.GetRequiredService<DataContext>();
+    context.Database.Migrate();
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occured during migration!");
+}
 
 app.Run();

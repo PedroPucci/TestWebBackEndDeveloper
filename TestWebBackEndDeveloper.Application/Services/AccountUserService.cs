@@ -1,32 +1,34 @@
 ﻿using TestWebBackEndDeveloper.Application.Services.Interfaces;
+using TestWebBackEndDeveloper.Domain.Entity;
+using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
 
 namespace TestWebBackEndDeveloper.Application.Services
 {
-    public class AccountService : IBalanceService
+    public class AccountUserService : IAccountUserService
     {
         private readonly IRepositoryUoW _repositoryUoW;
 
-        public AccountService(IRepositoryUoW repositoryUoW)
+        public AccountUserService(IRepositoryUoW repositoryUoW)
         {
             _repositoryUoW = repositoryUoW;
         }
 
-        public Task<Balance> AddBalanceAsync(Balance balance)
+        public Task<AccountUser> AddAccountUserAsync(AccountUser accountUser)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteBalanceAsync(int balanceId)
+        public Task DeleteAccountUserAsync(int accountId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Balance>> GetAllBalancesAsync()
+        public Task<List<AccountUser>> GetAllAccountUsersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Balance> UpdateBalanceAsync(Balance balance)
+        public Task<AccountUser> UpdateAccountUserAsync(AccountUser accountUser)
         {
             throw new NotImplementedException();
         }

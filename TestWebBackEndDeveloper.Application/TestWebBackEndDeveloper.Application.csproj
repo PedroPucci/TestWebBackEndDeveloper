@@ -23,4 +23,9 @@
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TestWebBackEndDeveloper.Domain\TestWebBackEndDeveloper.Domain.csproj" />
+    <ProjectReference Include="..\TestWebBackEndDeveloper.Infrastracture\TestWebBackEndDeveloper.Infrastracture.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿using System.Security.Principal;
+﻿using TestWebBackEndDeveloper.Domain.Entity;
 
 namespace TestWebBackEndDeveloper.Application.Services.Interfaces
 {
