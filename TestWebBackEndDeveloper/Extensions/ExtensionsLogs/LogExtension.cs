@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using Serilog.Events;
+using ILogger = Serilog.ILogger;
 
 namespace TestWebBackEndDeveloper.Extensions.ExtensionsLogs
 {

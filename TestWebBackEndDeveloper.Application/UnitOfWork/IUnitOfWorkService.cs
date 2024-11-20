@@ -1,8 +1,10 @@
-﻿namespace TestWebBackEndDeveloper.Application.UnitOfWork
+﻿using TestWebBackEndDeveloper.Application.Services;
+
+namespace TestWebBackEndDeveloper.Application.UnitOfWork
 {
     public interface IUnitOfWorkService
     {
-        AccountService AccountService { get; }
+        AccountUserService AccountService { get; }
         DepositService DepositService { get; }
         BalanceService BalanceService { get; }
     }

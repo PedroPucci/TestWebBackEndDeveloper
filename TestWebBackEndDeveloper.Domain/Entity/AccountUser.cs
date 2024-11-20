@@ -7,5 +7,7 @@ namespace TestWebBackEndDeveloper.Domain.Entity
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
+        public ICollection<Deposit> Deposits { get; set; }
+        public Balance Balance { get; set; }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using TestWebBackEndDeveloper.Application.Services;
+using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
 
 namespace TestWebBackEndDeveloper.Application.UnitOfWork
 {
     public class UnitOfWorkService : IUnitOfWorkService
     {
         private readonly IRepositoryUoW _repositoryUoW;
-        private AccountService accountService;
+        private AccountUserService accountService;
         private DepositService depositService;
         private BalanceService balanceService;
 
@@ -14,13 +15,13 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
             _repositoryUoW = repositoryUoW;
         }
 
-        public AccountService AccountService
+        public AccountUserService AccountService
         {
             get
             {
                 if (accountService == null)
                 {
-                    accountService = new AccountService(_repositoryUoW);
+                    accountService = new AccountUserService(_repositoryUoW);
                 }
                 return accountService;
             }

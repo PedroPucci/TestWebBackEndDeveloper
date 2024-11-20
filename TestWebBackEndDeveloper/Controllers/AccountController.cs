@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Principal;
+using TestWebBackEndDeveloper.Application.UnitOfWork;
 using TestWebBackEndDeveloper.Domain.Entity;
 
 namespace TestWebBackEndDeveloper.Controllers
@@ -21,7 +22,7 @@ namespace TestWebBackEndDeveloper.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddAccount([FromBody] AccountUser accountUser)
         {
-            var result = await _serviceUoW.AccountService.AddAccountAsync(accountUser);
+            var result = await _serviceUoW.AccountService.AddAccountUserAsync(accountUser);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
@@ -31,7 +32,7 @@ namespace TestWebBackEndDeveloper.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> UpdateAccount([FromBody] AccountUser accountUser)
         {
-            var result = await _serviceUoW.AccountService.UpdateAccountAsync(accountUser);
+            var result = await _serviceUoW.AccountService.UpdateAccountUserAsync(accountUser);
             return result.Success ? Ok(result) : BadRequest(accountUser);
         }
 
@@ -41,7 +42,7 @@ namespace TestWebBackEndDeveloper.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> DeleteAccount(int id)
         {
-            await _serviceUoW.AccountService.DeleteAccountAsync(id);
+            await _serviceUoW.AccountService.DeleteAccountUserAsync(id);
             return Ok();
         }
 
@@ -50,7 +51,7 @@ namespace TestWebBackEndDeveloper.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllAccounts()
         {
-            var accounts = await _serviceUoW.AccountService.GetAllAccountsAsync();
+            var accounts = await _serviceUoW.AccountService.GetAllAccountUsersAsync();
             return Ok(accounts);
         }
     }
