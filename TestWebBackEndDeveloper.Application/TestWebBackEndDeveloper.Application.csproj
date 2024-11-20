@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TestWebBackEndDeveloper.Domain\TestWebBackEndDeveloper.Domain.csproj" />
     <ProjectReference Include="..\TestWebBackEndDeveloper.Infrastracture\TestWebBackEndDeveloper.Infrastracture.csproj" />
+    <ProjectReference Include="..\TestWebBackEndDeveloper.Shared\TestWebBackEndDeveloper.Shared.csproj" />
   </ItemGroup>
 
 </Project>

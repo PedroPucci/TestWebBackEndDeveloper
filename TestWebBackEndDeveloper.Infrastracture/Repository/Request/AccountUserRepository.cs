@@ -1,6 +1,7 @@
 ﻿using TestWebBackEndDeveloper.Domain.Entity;
 using TestWebBackEndDeveloper.Infrastracture.Connection;
 using TestWebBackEndDeveloper.Infrastracture.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
 {
@@ -13,24 +14,38 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
             _context = context;
         }
 
-        public Task<AccountUser> AddAccountUserAsync(AccountUser accountUser)
+        public async Task<AccountUser> AddAccountUserAsync(AccountUser accountUser)
         {
-            throw new NotImplementedException();
-        }
-
-        public AccountUser DeleteAccountUserAsync(AccountUser accountUser)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<AccountUser>> GetAllAccountUsersAsync()
-        {
-            throw new NotImplementedException();
+            var result = await _context.AccountUser.AddAsync(accountUser);
+            return result.Entity;
         }
 
         public AccountUser UpdateAccountUserAsync(AccountUser accountUser)
         {
-            throw new NotImplementedException();
+            var response = _context.AccountUser.Update(accountUser);
+            return response.Entity;
+        }
+
+        public AccountUser DeleteAccountUserAsync(AccountUser accountUser)
+        {
+            var response = _context.AccountUser.Remove(accountUser);
+            return response.Entity;
+        }
+
+        public async Task<List<AccountUser>> GetAllAccountUsersAsync()
+        {
+            return await _context.AccountUser
+                .OrderBy(movie => movie.Name)
+                .Select(movie => new AccountUser
+                {
+                    Name = movie.Name,
+                    Email = movie.Email
+                }).ToListAsync();
+        }
+
+        public async Task<AccountUser> GetAccountUserByIdAsync(int? id)
+        {
+            return await _context.AccountUser.FirstOrDefaultAsync(movie => movie.Id == id);
         }
     }
 }

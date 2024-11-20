@@ -45,7 +45,7 @@ namespace TestWebBackEndDeveloper.Controllers
             return Ok();
         }
 
-        [HttpGet("all")]
+        [HttpGet("All Accounts")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AccountUser>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllAccounts()
