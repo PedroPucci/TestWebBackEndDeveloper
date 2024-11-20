@@ -3,6 +3,8 @@ using TestWebBackEndDeveloper.Application.ExtensionError;
 using TestWebBackEndDeveloper.Application.Services.Interfaces;
 using TestWebBackEndDeveloper.Domain.Entity;
 using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
+using TestWebBackEndDeveloper.Shared.Enums.Errors;
+using TestWebBackEndDeveloper.Shared.Helpers;
 using TestWebBackEndDeveloper.Shared.Validator;
 
 namespace TestWebBackEndDeveloper.Application.Services
@@ -55,20 +57,34 @@ namespace TestWebBackEndDeveloper.Application.Services
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
-                var accountUserId = accountUser.Id;
+                var isValidAccountUser = await IsValidAccountUserRequest(accountUser);
 
-                AccountUser accountUserIdFound = await _repositoryUoW.AccountUserRepository.GetAccountUserByIdAsync(accountUserId);
+                if (!isValidAccountUser.Success)
+                {
+                    Log.Error("Message: Invalid inputs to AccountUser");
+                    return Result<AccountUser>.Error(isValidAccountUser.Message);
+                }
 
-                if (accountUserIdFound is null)
+                if (string.IsNullOrWhiteSpace(accountUser.Name))
+                {
+                    Log.Error("Message: The Name field is null, empty, or whitespace.");
+                    return Result<AccountUser>.Error("The Name field cannot be null, empty, or whitespace.");
+                }
+
+                string accountUserName = accountUser.Name;
+
+                AccountUser accountUserNameFound = await _repositoryUoW.AccountUserRepository.GetAccountUserByNameAsync(accountUserName);
+
+                if (accountUserNameFound is null)
                 {
                     Log.Error("Message: Error to update to AccountUser");
                     throw new InvalidOperationException("AccountUser does not found!");
                 }
 
-                accountUserIdFound.Email = accountUser.Email;
-                accountUserIdFound.ModificationDate = DateTime.Now;
+                accountUserNameFound.Email = accountUser.Email;
+                accountUserNameFound.ModificationDate = DateTime.UtcNow;
 
-                var result = _repositoryUoW.AccountUserRepository.UpdateAccountUserAsync(accountUserIdFound);
+                var result = _repositoryUoW.AccountUserRepository.UpdateAccountUserAsync(accountUserNameFound);
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();

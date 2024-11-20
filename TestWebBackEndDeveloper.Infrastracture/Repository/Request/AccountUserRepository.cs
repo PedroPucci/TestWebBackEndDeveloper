@@ -35,17 +35,22 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
         public async Task<List<AccountUser>> GetAllAccountUsersAsync()
         {
             return await _context.AccountUser
-                .OrderBy(movie => movie.Name)
-                .Select(movie => new AccountUser
+                .OrderBy(accountUser => accountUser.Name)
+                .Select(accountUser => new AccountUser
                 {
-                    Name = movie.Name,
-                    Email = movie.Email
+                    Name = accountUser.Name,
+                    Email = accountUser.Email
                 }).ToListAsync();
         }
 
         public async Task<AccountUser> GetAccountUserByIdAsync(int? id)
         {
-            return await _context.AccountUser.FirstOrDefaultAsync(movie => movie.Id == id);
+            return await _context.AccountUser.FirstOrDefaultAsync(accountUser => accountUser.Id == id);
+        }
+
+        public async Task<AccountUser> GetAccountUserByNameAsync(string? name)
+        {
+            return await _context.AccountUser.FirstOrDefaultAsync(accountUser => accountUser.Name == name);
         }
     }
 }

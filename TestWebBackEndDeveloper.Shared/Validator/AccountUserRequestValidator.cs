@@ -18,6 +18,12 @@ namespace TestWebBackEndDeveloper.Shared.Validator
                 .NotEmpty()
                 .MinimumLength(4)
                 .WithMessage(AcountUserErrors.AccountUser_Error_EmailCanNotBeNullOrEmpty.Description());
+
+            RuleFor(p => p.Password)
+                .NotEmpty()
+                .MinimumLength(6)
+                .Matches(@"^(?=.*[A-Za-z]{4,})(?=.*\d{2,}).*$")
+                .WithMessage(AcountUserErrors.AccountUser_Error_PasswordInvalid.Description());
         }
     }
 }
