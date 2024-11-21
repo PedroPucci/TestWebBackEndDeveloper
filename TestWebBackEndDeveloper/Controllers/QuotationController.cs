@@ -26,5 +26,14 @@ namespace TestWebBackEndDeveloper.Controllers
             var result = await _serviceUoW.QuotationService.AddQuotationAsync(quotation);
             return result.Success ? Ok(result) : BadRequest(result);
         }
+
+        [HttpGet("All quotations")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AccountUser>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllQuotations()
+        {
+            var accounts = await _serviceUoW.QuotationService.GetAllQuotationsAsync();
+            return Ok(accounts);
+        }
     }
 }

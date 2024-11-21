@@ -51,9 +51,26 @@ namespace TestWebBackEndDeveloper.Application.Services
             }
         }
 
-        public Task<List<Quotation>> GetAllQuotationsAsync()
+        public async Task<List<Quotation>> GetAllQuotationsAsync()
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<Quotation> quotations = await _repositoryUoW.QuotationRepository.GetQuotationsAsync();
+                _repositoryUoW.Commit();
+                return quotations;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Message: Error to loading the list Quotation " + ex + "");
+                transaction.Rollback();
+                throw new InvalidOperationException("An error occurred");
+            }
+            finally
+            {
+                Log.Error("Message: GetAll with success Quotation");
+                transaction.Dispose();
+            }
         }
 
         public Task<List<Quotation>> GetAllQuotationsBuyAsync()
