@@ -27,7 +27,7 @@ namespace TestWebBackEndDeveloper.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpGet("All quotations")]
+        [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AccountUser>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllQuotations()
