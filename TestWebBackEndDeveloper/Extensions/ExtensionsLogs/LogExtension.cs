@@ -23,13 +23,11 @@ namespace TestWebBackEndDeveloper.Extensions.ExtensionsLogs
                     .WriteTo.File(Path.Combine(LogDirectory, "log-.txt"), rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 1000000)
                     .CreateLogger();
 
-                // Excluir arquivo de log do dia anterior
                 DeletePreviousLogFile();
             }
             catch (Exception ex)
             {
-                // Se ocorrer uma exceção, registre-a no console
-                Console.WriteLine($"Erro ao inicializar o logger: {ex.Message}");
+                Console.WriteLine($"Failed to start the logger: {ex.Message}");
             }
         }
 

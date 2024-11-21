@@ -5,23 +5,17 @@ using TestWebBackEndDeveloper.Infrastracture.Connection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 
-// Inicialize o logger Serilog
 LogExtension.InitializeLogger();
 
-// Obtenha o logger configurado
 var loggerSerialLog = LogExtension.GetLogger();
 
-// Use o logger...
 loggerSerialLog.Information("Logging initialized.");
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

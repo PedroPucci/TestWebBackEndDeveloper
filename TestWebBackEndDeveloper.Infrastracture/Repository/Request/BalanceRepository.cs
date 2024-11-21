@@ -1,5 +1,4 @@
-﻿using TestWebBackEndDeveloper.Domain.Entity;
-using TestWebBackEndDeveloper.Infrastracture.Connection;
+﻿using TestWebBackEndDeveloper.Infrastracture.Connection;
 using TestWebBackEndDeveloper.Infrastracture.Repository.Interfaces;
 
 namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request

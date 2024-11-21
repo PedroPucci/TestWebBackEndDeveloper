@@ -13,15 +13,6 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
             Configuration = configuration;
         }
 
-        //SQL Server version
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    string connectionString = Configuration.GetConnectionString("WebApiDatabase");
-        //    ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
-        //    optionsBuilder.UseMySql(connectionString, serverVersion);
-        //}
-
-        //Postgresql version
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
