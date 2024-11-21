@@ -73,14 +73,48 @@ namespace TestWebBackEndDeveloper.Application.Services
             }
         }
 
-        public Task<List<Quotation>> GetAllQuotationsBuyAsync()
+        public async Task<List<Quotation>> GetAllQuotationsBuyAsync()
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<Quotation> quotations = await _repositoryUoW.QuotationRepository.GetQuotationsBuyPriceAsync();
+                _repositoryUoW.Commit();
+                return quotations;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Message: Error to loading the list QuotationsBuy " + ex + "");
+                transaction.Rollback();
+                throw new InvalidOperationException("An error occurred");
+            }
+            finally
+            {
+                Log.Error("Message: GetAll with success QuotationsBuy");
+                transaction.Dispose();
+            }
         }
 
-        public Task<List<Quotation>> GetAllQuotationsSellAsync()
+        public async Task<List<Quotation>> GetAllQuotationsSellAsync()
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<Quotation> quotations = await _repositoryUoW.QuotationRepository.GetQuotationsSellPriceAsync();
+                _repositoryUoW.Commit();
+                return quotations;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Message: Error to loading the list QuotationsSell " + ex + "");
+                transaction.Rollback();
+                throw new InvalidOperationException("An error occurred");
+            }
+            finally
+            {
+                Log.Error("Message: GetAll with success QuotationsSell");
+                transaction.Dispose();
+            }
         }
 
         private async Task<Result<Quotation>> IsValidQuotationRequest(Quotation quotation)

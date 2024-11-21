@@ -1,8 +1,8 @@
 ﻿namespace TestWebBackEndDeveloper.Domain.Enum
 {
-    public enum QuotationStatus : ushort
+    public enum QuotationStatus
     {
-        Buy,
-        Sell
+        Buy = 1,
+        Sell = 2
     }
 }

@@ -35,5 +35,23 @@ namespace TestWebBackEndDeveloper.Controllers
             var accounts = await _serviceUoW.QuotationService.GetAllQuotationsAsync();
             return Ok(accounts);
         }
+
+        [HttpGet("All quotations QuotationsBuy")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AccountUser>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllQuotationsBuy()
+        {
+            var accounts = await _serviceUoW.QuotationService.GetAllQuotationsBuyAsync();
+            return Ok(accounts);
+        }
+
+        [HttpGet("All quotations QuotationsSell")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AccountUser>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllQuotationsSell()
+        {
+            var accounts = await _serviceUoW.QuotationService.GetAllQuotationsSellAsync();
+            return Ok(accounts);
+        }
     }
 }
