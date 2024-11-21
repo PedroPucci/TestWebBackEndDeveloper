@@ -1,79 +1,107 @@
-# TestWebBackEndDeveloper
+# **TestWebBackEndDeveloper**
 
-# IDE's utilizadas
+## **IDE's Utilizadas**
 - Visual Studio 2022
 - PostgreSQL
 
-# O que tem no projeto
-- SerialLog
-- FluentValidator
-- ORM Entity Framework
-- Unit of Work
-- Migrations
+---
 
-# Como executar o projeto
-Quando baixar o projeto, é preciso rodar as migrations. Para isso execute os passos abaixo:
+## **Recursos do Projeto**
+- **Serilog**: Para geração e gerenciamento de logs.
+- **FluentValidator**: Para validação de dados e regras de negócios.
+- **Entity Framework (ORM)**: Para mapeamento e interação com o banco de dados.
+- **Unit of Work**: Padrão de design para gerenciar transações e persistência de dados de forma coesa.
+- **Migrations**: Gerenciamento de alterações no banco de dados.
 
-1. Verifique no projeto que a pasta Migrations esteja vazia, caso contrário delete todos os arquivos da pasta.
-![image](https://github.com/user-attachments/assets/58d90e48-a7a3-4ee2-a1ef-3fbec12e0ea1)
+---
 
-2. Precisa executar os seguintes comandos, dentro de Package Manager Console:
+## **Como Executar o Projeto**
 
-  ![image](https://github.com/user-attachments/assets/16815e76-ed94-455a-8326-d25f7e88a2e1)
+### **1. Configuração Inicial do Banco de Dados**
+1. Verifique se a pasta `Migrations` no projeto está vazia. Caso contrário, delete todos os arquivos dessa pasta.
+   
+2. Execute os seguintes comandos no **Package Manager Console**:
+   - Certifique-se de selecionar o projeto relacionado ao banco de dados no menu "Default project".
+   - Execute:
+     ```bash
+     add-migration PrimeiraMigracao
+     update-database
+     ```
+   - Isso criará e configurará o banco de dados no PostgreSQL.
 
-  Aqui deve escolher a library referente ao banco de dados, dentro de "Default project"
-  ![image](https://github.com/user-attachments/assets/897f2db9-e5cc-4f51-a673-59bc392f8209)
-Executar os seguintes comandos:
-- add-migration PrimeiraMigracao
-- update-database
-Dessa forma o banco será criado no PostgreSQL
+---
 
-Utilizando o Visual Studio 2022
-Com o projeto aberto, selecionar como projeto para executar, o projeto: TestWebBackEndDeveloper. Para fazer isso clique com o botão direito e selecione a opção "Set as Startup Project".
-![image](https://github.com/user-attachments/assets/bab5bb84-782f-407a-a585-6def3ac808ec)
+### **2. Executando o Projeto**
+1. Abra o projeto no Visual Studio 2022.
+2. Configure o projeto principal para execução:
+   - Clique com o botão direito no projeto **TestWebBackEndDeveloper** e selecione `Set as Startup Project`.
+3. Clique no botão **HTTPS** no menu superior para iniciar a aplicação.
 
-Em seguida, clicar no botão https que se localiza no menu superior.
-![image](https://github.com/user-attachments/assets/b43741fd-2713-44e6-8385-d64f6c1d5bba)
+**Observações:**
+- Caso seu antivírus exiba alertas ao executar o projeto, será necessário fechar esses avisos para continuar.
+- Durante a execução, um console será aberto para a geração de logs. Caso queira, você pode fechá-lo sem impactar a execução do sistema.
 
-- Observação: Caso tenha algum antivírus instalado, pode ser que aconteça um alerta na hora de executar o projeto, precisando fechar o mesmo.
-- Observação: O projeto tem a execução de uma rotina de criação de logs, dessa forma será aberto o console para o log no caso pode fechar.
- 
-Para a criação do log
+---
 
-Na criação do log, foi feita para criar um arquivo diário com as informações que estão sendo processas no projeto.
-Essa informação no projeto está criada no seguinte path: C://Users//User//Downloads//logs. Para que seja executado o log, precisa criar uma pasta nesse caminho. Porém, fica a critério caso queira trocar o path e/ou a pasta.
-Formato do arquivo log criado:
+### **3. Configuração do Log**
+- O sistema gera logs diários com informações sobre os processos executados no projeto.
+- O log será salvo no diretório:  
+  `C://Users//User//Downloads//logs`.  
+  **Nota**: É necessário criar a pasta manualmente nesse caminho ou alterar o diretório no código, caso deseje personalizá-lo.
 
-![image](https://github.com/user-attachments/assets/a024ef70-dee5-45d5-9b67-0e77ca5eba90)
+**Formato do arquivo de log criado**:
+- Arquivo diário com informações estruturadas.
 
-No final de todas as etapas anteriores, a pasta log com seu arquivo será criado e alimentado na medida que o sistema for sendo utilizado e será aberto no navegador de sua escolha dentro do Visual Studio uma pagina com o Swagger do projeto
+---
 
-# Organização do projeto
+### **4. Finalização**
+Após seguir as etapas anteriores, o sistema será iniciado, e uma página com a interface **Swagger** será aberta automaticamente no navegador configurado no Visual Studio. Essa página permitirá explorar e testar os endpoints da API.
 
-O projeto foi criado da seguinte forma:
+---
 
-1. TestWebBackEndDeveloper que é referente a API e que possui os endpoints para serem acessadas.
-- Controllers
-- Extensions com a classe para gerar o log e a classe de extensão da classe Program
-- Appsettings que terá as informações para acessar o banco de dados
-- A Classe Program
+## **Estrutura do Projeto**
 
-2. TestWebBackEndDeveloper.Application é a library que foi criada para ser responsável por ser a intermediária da controller com a camada de banco de dados do sistema; como também responsável por outras funções da própria aplicação, como por exemplo envio de email
-- ExtensionError é a pasta que contém a classe Result para o controle de erros que foi feita com o FluentValidator
-- Services é a pasta que contém as classes de serviços e suas interfaces
-- UnitOfWork que contém os arquivos do Unit of Work. (é um padrão de design usado para gerenciar transações e a persistência de dados de forma coesa. Ele age como uma camada intermediária entre o repositório e o contexto de dados (como o Entity Framework DbContext) e ajuda a organizar e gerenciar mudanças nos objetos de domínio de forma transacional)
+### **1. TestWebBackEndDeveloper (API)**
+Contém os endpoints para acesso e execução das funcionalidades:
+- **Controllers**: Controladores da aplicação.
+- **Extensions**:  
+  - Classe para gerar logs.  
+  - Extensões para a classe `Program`.
+- **Appsettings**: Configurações, incluindo conexão com o banco de dados.
+- **Program**: Classe principal para inicialização.
 
-3. TestWebBackEndDeveloper.Domain é a library que foi criada para ser responsável pelo dados do projeto.
-- Entity pasta que contém as entidades do projeto
-- Enum pasta que contém os enums utilizados no projeto
-- General pasta por conter classes mais genericas, dentro dela tem a classe BaseEntity (criada com o objetivo de ter as propriedades comuns das entidades)
+---
 
-4. TestWebBackEndDeveloper.Infrastracture é a library que foi criada para ser responsável pela camada de banco de dados
-- Pasta Connection possui a classe de conexão ao banco de dados e a mesma classe responsável pela criação das tabelas e relacionamentos da entidades para o Entity Framework
-- Migrations, depois que executar os comandos citados no início do documento, as migrations geradas irão ficar aqui
-- Repository, pasta que contém os repositorios e as interfaces do projeto
+### **2. TestWebBackEndDeveloper.Application**
+Camada intermediária entre os controladores e o banco de dados. Responsável também por funções específicas, como envio de e-mails.
+- **ExtensionError**: Contém a classe `Result` para controle de erros, usando FluentValidator.
+- **Services**: Contém as classes de serviços e interfaces.
+- **UnitOfWork**: Implementação do padrão **Unit of Work**, que gerencia transações e persistência de dados.
 
-5. TestWebBackEndDeveloper.Shared é a library que foi criada para utilizar o FluentValidator
-- Enums, possui as classes de enum de erro
-- Helpers, possui a classe de validação de erros
-- Validator, possui as classes de regras de validação para as entidades
+---
+
+### **3. TestWebBackEndDeveloper.Domain**
+Camada de domínio, responsável pelos dados principais do sistema.
+- **Entity**: Contém as entidades do projeto.
+- **Enum**: Contém enums utilizados no projeto.
+- **General**: Contém classes genéricas, incluindo a `BaseEntity`, com propriedades comuns às entidades.
+
+---
+
+### **4. TestWebBackEndDeveloper.Infrastructure**
+Camada responsável pela interação com o banco de dados.
+- **Connection**: Configuração de conexão e mapeamento das entidades para o Entity Framework.
+- **Migrations**: Diretório onde as migrations geradas serão armazenadas.
+- **Repository**: Contém repositórios e suas interfaces.
+
+---
+
+### **5. TestWebBackEndDeveloper.Shared**
+Biblioteca utilizada para validações e compartilhamento de recursos comuns:
+- **Enums**: Classes de enums para erros.
+- **Helpers**: Classe auxiliar para validação de erros.
+- **Validator**: Regras de validação para as entidades.
+
+---
+
+Essa estrutura garante organização, modularidade e escalabilidade ao projeto.
