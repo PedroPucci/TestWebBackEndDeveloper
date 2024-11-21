@@ -15,7 +15,7 @@ namespace TestWebBackEndDeveloper.Controllers
             _serviceUoW = unitOfWorkService;
         }
 
-        [HttpGet("All Accounts")]
+        [HttpGet("Balance for accountUser")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Balance>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetBalanceByAccount(int id)
