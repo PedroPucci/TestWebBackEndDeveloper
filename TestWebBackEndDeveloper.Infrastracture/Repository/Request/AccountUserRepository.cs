@@ -38,6 +38,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
                 .OrderBy(accountUser => accountUser.Name)
                 .Select(accountUser => new AccountUser
                 {
+                    Id = accountUser.Id,
                     Name = accountUser.Name,
                     Email = accountUser.Email
                 }).ToListAsync();

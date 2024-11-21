@@ -10,6 +10,6 @@ namespace TestWebBackEndDeveloper.Domain.Entity
         [JsonIgnore]
         public AccountUser? AccountUsers { get; set; }
 
-        public decimal Value { get; set; }
+        public double Value { get; set; }
     }
 }

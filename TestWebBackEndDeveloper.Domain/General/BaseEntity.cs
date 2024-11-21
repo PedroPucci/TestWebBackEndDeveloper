@@ -4,7 +4,7 @@ namespace TestWebBackEndDeveloper.Domain.General
 {
     public abstract class BaseEntity
     {
-        [JsonIgnore]
+        //[JsonIgnore]
         public int Id { get; set; }
 
         [JsonIgnore]

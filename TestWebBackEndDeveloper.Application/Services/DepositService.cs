@@ -29,6 +29,12 @@ namespace TestWebBackEndDeveloper.Application.Services
                     return Result<Deposit>.Error(isValidDeposit.Message);
                 }
 
+                if (deposit.AccountId <= 0)
+                {
+                    Log.Error("Message: Invalid inputs to Deposit");
+                    return Result<Deposit>.Error(isValidDeposit.Message);
+                }
+
                 deposit.Value = deposit.Value;
                 deposit.AccountId = deposit.AccountId;
                 deposit.ModificationDate = DateTime.UtcNow;

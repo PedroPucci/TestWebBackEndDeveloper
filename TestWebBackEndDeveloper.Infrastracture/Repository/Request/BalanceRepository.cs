@@ -12,25 +12,5 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
         {
             _context = context;
         }
-
-        public Task<Balance> AddBalanceAsync(Balance balance)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Balance DeleteBalanceAsync(Balance balance)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Balance>> GetAllBalanceAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Balance UpdateBalanceAsync(Balance balance)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
