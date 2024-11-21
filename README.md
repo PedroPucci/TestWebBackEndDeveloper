@@ -9,6 +9,7 @@
 - FluentValidator
 - ORM Entity Framework
 - Unit of Work
+- Migrations
 
 # Como executar o projeto
 Quando baixar o projeto, é preciso rodar as migrations. Para isso execute os passos abaixo:
