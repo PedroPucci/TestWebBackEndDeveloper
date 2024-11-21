@@ -30,6 +30,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
         public DbSet<AccountUser> AccountUser { get; set; }
         public DbSet<Deposit> Deposit { get; set; }
         public DbSet<Balance> Balance { get; set; }
+        public DbSet<Quotation> Quotation { get; set; }
                 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +78,22 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
                       .HasForeignKey<Balance>("AccountId")
                       .OnDelete(DeleteBehavior.Cascade)
                       .IsRequired(false);
+            });
+
+            modelBuilder.Entity<Quotation>(entity =>
+            {
+                entity.HasKey(q => q.Id);
+
+                entity.Property(q => q.BuyPrice)
+                      .HasColumnType("decimal(18, 8)")
+                      .IsRequired();
+
+                entity.Property(q => q.SellPrice)
+                      .HasColumnType("decimal(18, 8)")
+                      .IsRequired();
+
+                entity.Property(q => q.DateHourQuotation)
+                      .IsRequired();
             });
         }
     }

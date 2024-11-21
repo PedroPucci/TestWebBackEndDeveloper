@@ -7,5 +7,6 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
         AccountUserService AccountService { get; }
         DepositService DepositService { get; }
         BalanceService BalanceService { get; }
+        QuotationService QuotationService { get; }
     }
 }
