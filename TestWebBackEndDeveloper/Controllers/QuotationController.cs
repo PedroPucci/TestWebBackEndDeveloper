@@ -36,7 +36,7 @@ namespace TestWebBackEndDeveloper.Controllers
             return Ok(accounts);
         }
 
-        [HttpGet("All quotations QuotationsBuy")]
+        [HttpGet("All QuotationsBuy")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AccountUser>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllQuotationsBuy()
@@ -45,7 +45,7 @@ namespace TestWebBackEndDeveloper.Controllers
             return Ok(accounts);
         }
 
-        [HttpGet("All quotations QuotationsSell")]
+        [HttpGet("All QuotationsSell")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AccountUser>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllQuotationsSell()
