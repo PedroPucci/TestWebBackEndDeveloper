@@ -16,7 +16,16 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
 
         public async Task<AccountUser> AddAccountUserAsync(AccountUser accountUser)
         {
+            if (accountUser == null)
+                throw new ArgumentNullException(nameof(accountUser), "AccountUser cannot be null");
+
             var result = await _context.AccountUser.AddAsync(accountUser);
+
+            if (accountUser.Balance == null)
+                await AddBalanceAsync(accountUser);
+
+            await _context.SaveChangesAsync();
+
             return result.Entity;
         }
 
@@ -44,14 +53,26 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
                 }).ToListAsync();
         }
 
-        public async Task<AccountUser> GetAccountUserByIdAsync(int? id)
+        public async Task<AccountUser?> GetAccountUserByIdAsync(int? id)
         {
             return await _context.AccountUser.FirstOrDefaultAsync(accountUser => accountUser.Id == id);
         }
 
-        public async Task<AccountUser> GetAccountUserByNameAsync(string? name)
+        public async Task<AccountUser?> GetAccountUserByNameAsync(string? name)
         {
             return await _context.AccountUser.FirstOrDefaultAsync(accountUser => accountUser.Name == name);
+        }
+
+        private async Task<Balance> AddBalanceAsync(AccountUser accountUser)
+        {
+            accountUser.Balance = new Balance
+            {
+                AccountId = accountUser.Id,
+                Value = 0
+            };
+
+            var result = await _context.Balance.AddAsync(accountUser.Balance);
+            return result.Entity;
         }
     }
 }

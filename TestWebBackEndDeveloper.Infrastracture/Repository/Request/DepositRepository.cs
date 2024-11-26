@@ -16,7 +16,14 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
 
         public async Task<Deposit> AddDepositAsync(Deposit deposit)
         {
+            if (deposit == null)
+                throw new ArgumentNullException(nameof(deposit), "Deposit cannot be null");
+
             var result = await _context.Deposit.AddAsync(deposit);
+
+            await AddOrUpdateBalanceAsync(deposit);
+            await _context.SaveChangesAsync();
+
             return result.Entity;
         }
 
@@ -27,6 +34,43 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
                 .SumAsync(d => d.Value);
 
             return (double)totalDeposits;
+        }
+
+        private async Task AddOrUpdateBalanceAsync(Deposit deposit)
+        {
+            var balance = await _context.Balance.FirstOrDefaultAsync(b => b.AccountId == deposit.AccountId);
+
+            if (balance != null)
+            {
+                balance.Value += deposit.Value;
+                balance.ModificationDate = DateTime.UtcNow;
+            }
+            else
+            {
+                //var newBalance = new Balance
+                //{
+                //    AccountId = deposit.AccountId,
+                //    Value = deposit.Value,
+                //    CreateDate = DateTime.UtcNow,
+                //    ModificationDate = DateTime.UtcNow,
+                //};
+
+                var result = CreatedBalance(deposit);
+                await _context.Balance.AddAsync(result);
+            }
+        }
+
+        private Balance CreatedBalance(Deposit deposit)
+        {
+            var newBalance = new Balance
+            {
+                AccountId = deposit.AccountId,
+                Value = deposit.Value,
+                CreateDate = DateTime.UtcNow,
+                ModificationDate = DateTime.UtcNow,
+            };
+
+            return newBalance;
         }
     }
 }
