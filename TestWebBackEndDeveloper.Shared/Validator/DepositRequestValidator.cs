@@ -11,8 +11,9 @@ namespace TestWebBackEndDeveloper.Shared.Validator
         {
             RuleFor(p => p.Value)
                 .NotEmpty()
+                    .WithMessage(DepositErrors.Deposit_Error_ValueCanNotBeNullOrEmpty.Description())
                 .GreaterThan(0)
-                .WithMessage(DepositErrors.Deposit_Error_ValueCanNotBeNullOrEmpty.Description());
+                    .WithMessage(DepositErrors.Deposit_Error_ValueMustBeGreaterThanZero.Description());
         }
     }
 }

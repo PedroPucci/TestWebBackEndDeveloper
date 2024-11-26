@@ -11,19 +11,25 @@ namespace TestWebBackEndDeveloper.Shared.Validator
         {
             RuleFor(p => p.Name)
                 .NotEmpty()
+                    .WithMessage(AcountUserErrors.AccountUser_Error_NameCanNotBeNullOrEmpty.Description())
                 .MinimumLength(4)
-                .WithMessage(AcountUserErrors.AccountUser_Error_NameCanNotBeNullOrEmpty.Description());
+                    .WithMessage(AcountUserErrors.AccountUser_Error_NameLenghtLessFour.Description());
 
             RuleFor(p => p.Email)
                 .NotEmpty()
+                    .WithMessage(AcountUserErrors.AccountUser_Error_EmailCanNotBeNullOrEmpty.Description())
                 .MinimumLength(4)
-                .WithMessage(AcountUserErrors.AccountUser_Error_EmailCanNotBeNullOrEmpty.Description());
+                    .WithMessage(AcountUserErrors.AccountUser_Error_EmailLenghtLessFour.Description())
+                .EmailAddress()
+                    .WithMessage(AcountUserErrors.AccountUser_Error_InvalidEmailFormat.Description());
 
             RuleFor(p => p.Password)
                 .NotEmpty()
+                    .WithMessage(AcountUserErrors.AccountUser_Error_PasswordCanNotBeNullOrEmpty.Description())
                 .MinimumLength(6)
+                    .WithMessage(AcountUserErrors.AccountUser_Error_PasswordLenghtLessFour.Description())
                 .Matches(@"^(?=.*[A-Za-z]{4,})(?=.*\d{2,}).*$")
-                .WithMessage(AcountUserErrors.AccountUser_Error_PasswordInvalid.Description());
+                    .WithMessage(AcountUserErrors.AccountUser_Error_PasswordInvalid.Description());
         }
     }
 }
