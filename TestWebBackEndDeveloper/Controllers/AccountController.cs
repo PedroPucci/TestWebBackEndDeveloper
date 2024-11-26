@@ -18,6 +18,7 @@ namespace TestWebBackEndDeveloper.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddAccount([FromBody] AccountUser accountUser)
         {
             if (!ModelState.IsValid)

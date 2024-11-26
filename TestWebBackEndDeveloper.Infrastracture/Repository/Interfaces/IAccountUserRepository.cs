@@ -8,7 +8,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Interfaces
         AccountUser UpdateAccountUserAsync(AccountUser accountUser);
         AccountUser DeleteAccountUserAsync(AccountUser accountUser);
         Task<List<AccountUser>> GetAllAccountUsersAsync();
-        Task<AccountUser> GetAccountUserByIdAsync(int? id);
-        Task<AccountUser> GetAccountUserByNameAsync(string? name);
+        Task<AccountUser?> GetAccountUserByIdAsync(int? id);
+        Task<AccountUser?> GetAccountUserByNameAsync(string? name);
     }
 }
