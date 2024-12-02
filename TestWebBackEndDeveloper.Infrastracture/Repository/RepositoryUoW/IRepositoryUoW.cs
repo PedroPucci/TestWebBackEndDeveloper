@@ -9,6 +9,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         IDepositRepository DepositRepository { get; }
         IBalanceRepository BalanceRepository { get; }
         IQuotationRepository QuotationRepository { get; }
+        IPurchaseRepository PurchaseRepository { get; }
 
         Task SaveAsync();
         void Commit();

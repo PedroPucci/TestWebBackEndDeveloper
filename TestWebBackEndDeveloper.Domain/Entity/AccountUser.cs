@@ -14,5 +14,8 @@ namespace TestWebBackEndDeveloper.Domain.Entity
 
         [JsonIgnore]
         public ICollection<Deposit>? Deposits { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Purchase>? Purchases { get; set; }
     }
 }

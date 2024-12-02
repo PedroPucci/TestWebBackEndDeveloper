@@ -13,6 +13,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         private IDepositRepository? _depositRepository = null;
         private IBalanceRepository? _balanceRepository = null;
         private IQuotationRepository? _quotationRepository = null;
+        private IPurchaseRepository? _purchaseRepository = null;
 
         public RepositoryUoW(DataContext context)
         {
@@ -64,6 +65,18 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
                     _quotationRepository = new QuotationRepository(_context);
                 }
                 return _quotationRepository;
+            }
+        }
+
+        public IPurchaseRepository PurchaseRepository
+        {
+            get
+            {
+                if (_purchaseRepository == null)
+                {
+                    _purchaseRepository = new PurchaseRepository(_context);
+                }
+                return _purchaseRepository;
             }
         }
 

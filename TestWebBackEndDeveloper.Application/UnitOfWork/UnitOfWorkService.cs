@@ -10,6 +10,7 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
         private DepositService depositService;
         private BalanceService balanceService;
         private QuotationService quotationService;
+        private PurchaseService purchaseService;
 
         public UnitOfWorkService(IRepositoryUoW repositoryUoW)
         {
@@ -61,6 +62,18 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
                     quotationService = new QuotationService(_repositoryUoW);
                 }
                 return quotationService;
+            }
+        }
+
+        public PurchaseService PurchaseService
+        {
+            get
+            {
+                if (purchaseService == null)
+                {
+                    purchaseService = new PurchaseService(_repositoryUoW);
+                }
+                return purchaseService;
             }
         }
     }
