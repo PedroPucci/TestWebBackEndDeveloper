@@ -47,14 +47,6 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
             }
             else
             {
-                //var newBalance = new Balance
-                //{
-                //    AccountId = deposit.AccountId,
-                //    Value = deposit.Value,
-                //    CreateDate = DateTime.UtcNow,
-                //    ModificationDate = DateTime.UtcNow,
-                //};
-
                 var result = CreatedBalance(deposit);
                 await _context.Balance.AddAsync(result);
             }

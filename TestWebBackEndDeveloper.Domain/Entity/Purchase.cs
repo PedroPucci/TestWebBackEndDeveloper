@@ -12,6 +12,11 @@ namespace TestWebBackEndDeveloper.Domain.Entity
         public DateTime PurchaseDate { get; set; }
 
         [JsonIgnore]
-        public AccountUser AccountUser { get; set; }
+        public AccountUser? AccountUser { get; set; }
+
+        protected Purchase()
+        {
+            PurchaseDate = DateTime.UtcNow;
+        }
     }
 }

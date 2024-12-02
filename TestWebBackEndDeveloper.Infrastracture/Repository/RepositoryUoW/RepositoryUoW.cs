@@ -107,7 +107,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         public void Dispose()
         {
             Dispose(true);
-            System.GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
     }
 }

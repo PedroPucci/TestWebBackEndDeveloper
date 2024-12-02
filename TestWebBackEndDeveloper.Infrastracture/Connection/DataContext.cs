@@ -12,9 +12,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Connection
         {
             Configuration = configuration;
         }
-
-        //public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
