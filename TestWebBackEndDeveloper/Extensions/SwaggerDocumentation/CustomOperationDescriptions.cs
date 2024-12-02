@@ -50,13 +50,16 @@ namespace TestWebBackEndDeveloper.Extensions.SwaggerDocumentation
                 AddResponses(operation, "200", "The account user was successfully deleted.");
                 AddResponses(operation, "404", "Account user not found. Please verify the account ID.");
             }
-            else if (context.ApiDescription.HttpMethod == "GET" && context.ApiDescription.RelativePath.Contains("All"))
+            else if (context.ApiDescription.HttpMethod == "GET" &&
+                    context.ApiDescription.RelativePath != null &&
+                    context.ApiDescription.RelativePath.Contains("All"))
             {
                 operation.Summary = "Retrieve all account users";
                 operation.Description = "This endpoint allows you to retrieve details of all existing account users.";
                 AddResponses(operation, "200", "All account user details were successfully retrieved.");
             }
-            else if (context.ApiDescription.HttpMethod == "GET" && context.ApiDescription.RelativePath.Contains("Balance for accountUser"))
+            else if (context.ApiDescription.HttpMethod == "GET" &&
+                     context.ApiDescription.RelativePath?.Contains("Balance for accountUser") == true)
             {
                 operation.Summary = "Retrieve balance for an account user";
                 operation.Description = "This endpoint allows you to retrieve the balance of an account user by providing the account ID.";
@@ -99,19 +102,22 @@ namespace TestWebBackEndDeveloper.Extensions.SwaggerDocumentation
                 operation.Description = "This endpoint allows you to create a new quotation for Bitcoin.";
                 AddResponses(operation, "200", "The quotation was successfully created.");
             }
-            else if (context.ApiDescription.HttpMethod == "GET" && context.ApiDescription.RelativePath.Contains("All QuotationsBuy"))
+            else if (context.ApiDescription.HttpMethod == "GET" &&
+                     context.ApiDescription.RelativePath?.Contains("All QuotationsBuy") == true)
             {
                 operation.Summary = "Retrieve all buy quotations";
                 operation.Description = "This endpoint allows you to retrieve all buy quotations for Bitcoin.";
                 AddResponses(operation, "200", "All buy quotations were successfully retrieved.");
             }
-            else if (context.ApiDescription.HttpMethod == "GET" && context.ApiDescription.RelativePath.Contains("All QuotationsSell"))
+            else if (context.ApiDescription.HttpMethod == "GET" &&
+                     context.ApiDescription.RelativePath?.Contains("All QuotationsSell") == true)
             {
                 operation.Summary = "Retrieve all sell quotations";
                 operation.Description = "This endpoint allows you to retrieve all sell quotations for Bitcoin.";
                 AddResponses(operation, "200", "All sell quotations were successfully retrieved.");
             }
-            else if (context.ApiDescription.HttpMethod == "GET" && context.ApiDescription.RelativePath.Contains("All"))
+            else if (context.ApiDescription.HttpMethod == "GET" &&
+                     context.ApiDescription.RelativePath?.Contains("All") == true)
             {
                 operation.Summary = "Retrieve all quotations";
                 operation.Description = "This endpoint allows you to retrieve all quotations for Bitcoin.";

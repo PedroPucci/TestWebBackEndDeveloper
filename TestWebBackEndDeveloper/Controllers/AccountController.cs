@@ -15,11 +15,6 @@ namespace TestWebBackEndDeveloper.Controllers
             _serviceUoW = unitOfWorkService;
         }
 
-        /// <summary>
-        /// Creates a new account user
-        /// </summary>
-        /// <param name="accountUser"></param>
-        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

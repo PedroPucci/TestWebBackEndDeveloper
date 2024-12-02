@@ -22,7 +22,7 @@ namespace TestWebBackEndDeveloper.Application.Extensions
                 opt.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Teste para vaga desenvolvedor backend",
+                    Title = "Teste backend: sistema Financeiro",
                     Description = @"
                         O desafio é criar um sistema financeiro com as seguintes funcionalidades:
                         - **Gerenciamento de depósitos, compras e vendas de Bitcoin.**
