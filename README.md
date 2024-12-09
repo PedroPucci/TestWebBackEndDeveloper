@@ -97,6 +97,7 @@ O desafio é criar um sistema financeiro para gerenciar depósitos, compras e ve
 
 ### **3. Configurando o Postman**
 
+### **4. Banco de dados não existe**
 ---
 
 ### **4. Configuração do Log**
