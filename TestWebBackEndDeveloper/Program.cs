@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using TestWebBackEndDeveloper.Application.Extensions;
+using TestWebBackEndDeveloper.Extensions;
 using TestWebBackEndDeveloper.Extensions.ExtensionsLogs;
 using TestWebBackEndDeveloper.Infrastracture.Connection;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 
@@ -44,5 +44,7 @@ catch (Exception ex)
     var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occured during migration!");
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.Run();

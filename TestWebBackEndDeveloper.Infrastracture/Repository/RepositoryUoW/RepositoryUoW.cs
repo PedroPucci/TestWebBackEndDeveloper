@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using Serilog;
 using TestWebBackEndDeveloper.Infrastracture.Connection;
 using TestWebBackEndDeveloper.Infrastracture.Repository.Interfaces;
 using TestWebBackEndDeveloper.Infrastracture.Repository.Request;
@@ -92,8 +93,16 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
 
         public void Commit()
         {
-            _context.SaveChanges();
-        }
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Database connection failed: {ex.Message}");
+                throw new ApplicationException("Database is not available. Please check the connection.");
+            }
+        }        
 
         protected virtual void Dispose(bool disposing)
         {
