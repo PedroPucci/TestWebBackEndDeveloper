@@ -97,7 +97,24 @@ O desafio é criar um sistema financeiro para gerenciar depósitos, compras e ve
 
 ### **3. Configurando o Postman**
 
-### **4. Banco de dados não existe**
+### **4. Banco de Dados**
+
+- **Centralização de Exceções:**  
+  Implementada a classe `ExceptionMiddleware` para unificar o tratamento de erros no sistema.
+
+- **Alterações Realizadas:**  
+  Ajustadas as classes `Program` e `RepositoryUoW` para integrar o middleware.
+
+- **Mensagens de Erro:**  
+  - Se o banco de dados não existir, os endpoints retornam:  
+    ```text
+    The database is currently unavailable. Please try again later.
+    ```
+  - Para erros inesperados na criação do banco, é exibido:  
+    ```text
+    An unexpected error occurred. Please contact support if the problem persists.
+    ```
+
 ---
 
 ### **4. Configuração do Log**
@@ -123,7 +140,9 @@ Contém os endpoints para acesso e execução das funcionalidades:
 1. Organização da biblioteca:
 - **Controllers**: Controladores da aplicação.
 - **Extensions**:  
-  - Classe para gerar logs.  
+  - SwaggerDocumentation: Documentação do swagger.
+  - ExtensionsLogs:       Classe para gerar logs.
+  - ExceptionMiddleware classe para tratar erro de conexão com o banco de dados.
   - Extensões para a classe `Program`.
 - **Appsettings**: Configurações, incluindo conexão com o banco de dados.
 - **Program**: Classe principal para inicialização.
