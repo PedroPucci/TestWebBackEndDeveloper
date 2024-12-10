@@ -14,7 +14,7 @@ namespace TestWebBackEndDeveloper.Domain.Entity
         [JsonIgnore]
         public AccountUser? AccountUser { get; set; }
 
-        protected Purchase()
+        public Purchase()
         {
             PurchaseDate = DateTime.UtcNow;
         }
