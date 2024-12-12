@@ -137,7 +137,7 @@ Após seguir as etapas anteriores, o sistema será iniciado, e uma página com a
 Essa estrutura garante organização, modularidade e escalabilidade ao projeto.
 ### **1. TestWebBackEndDeveloper (API)**
 Contém os endpoints para acesso e execução das funcionalidades:
-1. Organização da biblioteca:
+1. Organização das pastas:
 - **Controllers**: Controladores da aplicação.
 - **Extensions**:  
   - SwaggerDocumentation: Documentação do swagger.
@@ -151,7 +151,7 @@ Contém os endpoints para acesso e execução das funcionalidades:
 
 ### **2. TestWebBackEndDeveloper.Application**
 Camada intermediária entre os controladores e o banco de dados. Responsável também por funções específicas, como envio de e-mails.
-1. Organização da biblioteca:
+1. Organização das pastas:
 - **ExtensionError**: Contém a classe `Result` para controle de erros, usando FluentValidator.
 - **Services**: Contém as classes de serviços e interfaces.
 - **UnitOfWork**: Implementação do padrão **Unit of Work**, que gerencia transações e persistência de dados.
@@ -160,7 +160,7 @@ Camada intermediária entre os controladores e o banco de dados. Responsável ta
 
 ### **3. TestWebBackEndDeveloper.Domain**
 Camada de domínio, responsável pelos dados principais do sistema.
-1. Organização da biblioteca:
+1. Organização das pastas:
 - **Entity**: Contém as entidades do projeto.
 - **Enum**: Contém enums utilizados no projeto.
 - **General**: Contém classes genéricas, incluindo a `BaseEntity`, com propriedades comuns às entidades.
@@ -169,7 +169,7 @@ Camada de domínio, responsável pelos dados principais do sistema.
 
 ### **4. TestWebBackEndDeveloper.Infrastructure**
 Camada responsável pela interação com o banco de dados.
-1. Organização da biblioteca:
+1. Organização das pastas:
 - **Connection**: Configuração de conexão e mapeamento das entidades para o Entity Framework.
 - **Migrations**: Diretório onde as migrations geradas serão armazenadas.
 - **Repository**: Contém repositórios e suas interfaces.
@@ -178,7 +178,7 @@ Camada responsável pela interação com o banco de dados.
 
 ### **5. TestWebBackEndDeveloper.Shared**
 Biblioteca utilizada para validações e compartilhamento de recursos comuns:
-1. Organização da biblioteca:
+1. Organização das pastas:
 - **Enums**: Classes de enums para erros.
 - **Helpers**: Classe auxiliar para validação de erros.
 - **Validator**: Regras de validação para as entidades.
@@ -189,6 +189,6 @@ Biblioteca utilizada para validações e compartilhamento de recursos comuns:
 Biblioteca destinada à criação e execução de testes automatizados para garantir a qualidade e confiabilidade do sistema:
 - **xUnit**: Garante a qualidade do código ao permitir a criação de testes unitários eficientes e de fácil manutenção.
 - **Moq**: Permite simular objetos e comportamentos, eliminando a necessidade de criar implementações reais para dependências durante os testes.
-1. Organização da biblioteca:
+1. Organização das pastas:
 - **DomainTests**: Contém as classes de testes para as entidades.
 ---
