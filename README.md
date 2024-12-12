@@ -25,13 +25,6 @@ Link para acessar o desafio completo:
 
 ---
 
-## **Melhorias a fazer**
-- **JWT**
-- **Docker**
-- **Testes Unitários**
-
----
-
 ## **Como Executar o Projeto**
 
 ### **1. Configuração Inicial do Banco de Dados**
