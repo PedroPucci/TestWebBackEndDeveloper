@@ -1,3 +1,7 @@
+- [DesafioTecnico](https://github.com/SeuUsuario/SeuRepositorio/wiki/Explicacao-do-desafio)
+
+
+
 # **Especificação do Desafio**
 O desafio é criar um sistema financeiro para gerenciar depósitos, compras e vendas de Bitcoin. Ele deve permitir cadastro e login com JWT, consulta de saldo, cotação em tempo real, e posição de investimentos. Transações, como depósitos e vendas, enviam notificações por e-mail. Também inclui histórico de cotações e relatórios de operações com intervalos customizáveis. A base de dados pode ser MariaDB, PostgreSQL ou MongoDB.
 ### **1. Contas**
