@@ -28,9 +28,8 @@ Link para acessar o desafio completo:
 ## **Como Executar o Projeto**
 
 ### **1. Configuração Inicial do Banco de Dados**
-1. Faça o clone do projeto e use a IDE que for de sua preferência.
-2. Verifique se a pasta `Migrations` no projeto está vazia. Caso contrário, delete todos os arquivos dessa pasta.
-   
+1. Faça o clone do projeto.
+2. Verifique se a pasta `Migrations` no projeto está vazia. Caso contrário, delete todos os arquivos dessa pasta.   
 3. Execute os seguintes comandos no **Package Manager Console**:
    - Certifique-se de selecionar o projeto relacionado ao banco de dados no menu "Default project".
    - Execute:
