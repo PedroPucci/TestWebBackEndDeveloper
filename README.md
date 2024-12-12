@@ -134,7 +134,7 @@ Após seguir as etapas anteriores, o sistema será iniciado, e uma página com a
 ---
 
 ## **Estrutura do Projeto**
-
+Essa estrutura garante organização, modularidade e escalabilidade ao projeto.
 ### **1. TestWebBackEndDeveloper (API)**
 Contém os endpoints para acesso e execução das funcionalidades:
 1. Organização da biblioteca:
@@ -192,5 +192,3 @@ Biblioteca destinada à criação e execução de testes automatizados para gara
 1. Organização da biblioteca:
 - **NomePasta**: Descrição da pasta.
 ---
-
-Essa estrutura garante organização, modularidade e escalabilidade ao projeto.
