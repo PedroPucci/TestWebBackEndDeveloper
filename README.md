@@ -190,5 +190,5 @@ Biblioteca destinada à criação e execução de testes automatizados para gara
 - **xUnit**: Garante a qualidade do código ao permitir a criação de testes unitários eficientes e de fácil manutenção.
 - **Moq**: Permite simular objetos e comportamentos, eliminando a necessidade de criar implementações reais para dependências durante os testes.
 1. Organização da biblioteca:
-- **NomePasta**: Descrição da pasta.
+- **DomainTests**: Contém as classes de testes para as entidades.
 ---
