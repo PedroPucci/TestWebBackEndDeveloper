@@ -3,6 +3,11 @@ O desafio é criar um sistema financeiro para gerenciar depósitos, compras e ve
 
 Link para acessar o desafio completo:
 - [Desafio Técnico](https://github.com/PedroPucci/TestWebBackEndDeveloper/wiki/Explicacao-do-desafio)
+Link para acessar a Home:
+- [Home](https://github.com/PedroPucci/TestWebBackEndDeveloper/wiki)
+Link para acessar o quadro do Kanban:
+- [Kanban](https://github.com/users/PedroPucci/projects/3/views/1)
+
 ---
 # **Solução**
 
