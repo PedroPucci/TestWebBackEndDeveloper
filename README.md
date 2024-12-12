@@ -1,55 +1,8 @@
-- [Desafio Técnico](https://github.com/PedroPucci/TestWebBackEndDeveloper/wiki/Explicacao-do-desafio)
-
-
-
 # **Especificação do Desafio**
 O desafio é criar um sistema financeiro para gerenciar depósitos, compras e vendas de Bitcoin. Ele deve permitir cadastro e login com JWT, consulta de saldo, cotação em tempo real, e posição de investimentos. Transações, como depósitos e vendas, enviam notificações por e-mail. Também inclui histórico de cotações e relatórios de operações com intervalos customizáveis. A base de dados pode ser MariaDB, PostgreSQL ou MongoDB.
-### **1. Contas**
-- Deve permitir cadastro (nome, e-mail e senha) e login utilizando **token JWT**.
-- Todos os endpoints, exceto login e cadastro, exigem autenticação.
-### **2. Depósitos**
-- O cliente pode fazer depósitos em reais na plataforma (apenas registro do valor, sem transferência real).
-- Após o depósito, um e-mail deve ser enviado informando o valor depositado.
-### **3. Saldo**
-- É necessário um endpoint para consultar o saldo disponível em reais na conta do cliente.
-### **4. Cotação**
-- O cliente deve visualizar a cotação atual do **Bitcoin** (compra e venda).
-### **5. Compra**
-- O cliente pode comprar bitcoins utilizando o saldo disponível na conta.
-- O valor em reais será convertido pela cotação de venda.
-- Um e-mail deve ser enviado informando:
-  - Valor investido em R$.
-  - Valor comprado em BTC.
-### **6. Posição dos Investimentos**
-- O cliente deve visualizar suas posições de investimento com as seguintes informações:
-  - Data da compra.
-  - Valor investido.
-  - Cotação do BTC no momento da compra.
-  - Percentual de variação do preço do BTC.
-  - Valor bruto atual do investimento.
-### **7. Venda**
-- O cliente pode vender bitcoins:
-  - O valor será debitado dos investimentos pela ordem de compra (FIFO).
-  - O dinheiro será creditado na conta da plataforma.
-- Em caso de venda parcial:
-  - O investimento deve ser liquidado completamente.
-  - Valor residual deve ser reinvestido na cotação original do BTC.
-  - Ambas as transações devem constar no extrato.
-- Um e-mail deve ser enviado informando:
-  - Valor vendido em BTC.
-  - Valor resgatado em R$.
-### **8. Extrato**
-- O cliente pode listar depósitos, compras e resgates com:
-  - Datas.
-  - Cotações.
-- Intervalo: últimos 90 dias ou intervalo customizado.
-### **9. Volume**
-- Um endpoint deve retornar o total de bitcoins comprados e vendidos no dia atual.
-### **10. Histórico**
-- Endpoint com histórico de compra/venda do Bitcoin com:
-  - Frequência: 10 minutos (ex.: 8:00, 8:10, 8:20).
-  - Período: últimas 24 horas.
-- Dados com mais de 90 dias devem ser expurgados automaticamente.
+
+Link para acessar o desafio completo:
+- [Desafio Técnico](https://github.com/PedroPucci/TestWebBackEndDeveloper/wiki/Explicacao-do-desafio)
 ---
 # **Solução**
 
