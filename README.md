@@ -25,8 +25,6 @@ Link para acessar o desafio completo:
 
 ---
 
----
-
 ## **Melhorias a fazer**
 - **JWT**
 - **Docker**
