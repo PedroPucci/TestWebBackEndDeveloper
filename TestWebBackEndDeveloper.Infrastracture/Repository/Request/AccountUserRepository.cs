@@ -16,12 +16,12 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
 
         public async Task<AccountUser> AddAccountUserAsync(AccountUser accountUser)
         {
-            if (accountUser == null)
+            if (accountUser is null)
                 throw new ArgumentNullException(nameof(accountUser), "AccountUser cannot be null");
 
             var result = await _context.AccountUser.AddAsync(accountUser);
 
-            if (accountUser.Balance == null)
+            if (accountUser.Balance is null)
                 await AddBalanceAsync(accountUser);
 
             await _context.SaveChangesAsync();

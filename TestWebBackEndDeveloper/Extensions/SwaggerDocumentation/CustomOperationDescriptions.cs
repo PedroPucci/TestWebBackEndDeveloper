@@ -7,7 +7,7 @@ namespace TestWebBackEndDeveloper.Extensions.SwaggerDocumentation
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            if (context?.ApiDescription?.HttpMethod == null || context.ApiDescription.RelativePath == null)
+            if (context?.ApiDescription?.HttpMethod is null || context.ApiDescription.RelativePath is null)
                 return;
 
             var routeHandlers = new Dictionary<string, Action>

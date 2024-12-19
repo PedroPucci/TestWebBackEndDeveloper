@@ -3,6 +3,7 @@ using TestWebBackEndDeveloper.Application.ExtensionError;
 using TestWebBackEndDeveloper.Application.Services.Interfaces;
 using TestWebBackEndDeveloper.Domain.Entity;
 using TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW;
+using TestWebBackEndDeveloper.Shared.Logging;
 using TestWebBackEndDeveloper.Shared.Validator;
 
 namespace TestWebBackEndDeveloper.Application.Services
@@ -25,7 +26,7 @@ namespace TestWebBackEndDeveloper.Application.Services
 
                 if (!isValidAccountUser.Success)
                 {
-                    Log.Error("Message: Invalid inputs to AccountUser");
+                    Log.Error(LogMessages.InvalidAccountUserInputs());
                     return Result<AccountUser>.Error(isValidAccountUser.Message);
                 }
 
@@ -39,13 +40,13 @@ namespace TestWebBackEndDeveloper.Application.Services
             }
             catch (Exception ex)
             {
-                Log.Error("Message: Error to add a new AccountUser " + ex + "");
+                Log.Error(LogMessages.AddingAccountUserError(ex));
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred");
+                throw new InvalidOperationException("Message: Error to add a new AccountUser");
             }
             finally
             {
-                Log.Error("Message: Add with success AccountUser");
+                Log.Error(LogMessages.AddingAccountUserSuccess());
                 transaction.Dispose();
             }
         }
@@ -56,47 +57,40 @@ namespace TestWebBackEndDeveloper.Application.Services
             try
             {
                 var isValidAccountUser = await IsValidAccountUserRequest(accountUser);
+                string accountUserName = "";
+                AccountUser? accountUserNameFound = new AccountUser();
 
-                if (!isValidAccountUser.Success)
+                var validationResult = ValidateAccountUser(accountUser, isValidAccountUser);
+                if (!validationResult.Success)
+                    return validationResult;
+
+                if (accountUser.Name is not null)
+                    accountUserName = accountUser.Name;                
+
+                accountUserNameFound = await _repositoryUoW.AccountUserRepository.GetAccountUserByNameAsync(accountUserName);
+
+                ValidateAccountUserExistsForAction(accountUserNameFound, "update");
+
+                if (accountUserNameFound is not null)
                 {
-                    Log.Error("Message: Invalid inputs to AccountUser");
-                    return Result<AccountUser>.Error(isValidAccountUser.Message);
-                }
-
-                if (string.IsNullOrWhiteSpace(accountUser.Name))
-                {
-                    Log.Error("Message: The Name field is null, empty, or whitespace.");
-                    return Result<AccountUser>.Error("The Name field cannot be null, empty, or whitespace.");
-                }
-
-                string accountUserName = accountUser.Name;
-
-                AccountUser accountUserNameFound = await _repositoryUoW.AccountUserRepository.GetAccountUserByNameAsync(accountUserName);
-
-                if (accountUserNameFound is null)
-                {
-                    Log.Error("Message: Error to update to AccountUser");
-                    throw new InvalidOperationException("AccountUser does not found!");
-                }
-
-                accountUserNameFound.Email = accountUser.Email;
-                accountUserNameFound.ModificationDate = DateTime.UtcNow;
-
-                var result = _repositoryUoW.AccountUserRepository.UpdateAccountUserAsync(accountUserNameFound);
+                    accountUserNameFound.Email = accountUser.Email;
+                    accountUserNameFound.ModificationDate = DateTime.UtcNow;
+                    var result = _repositoryUoW.AccountUserRepository.UpdateAccountUserAsync(accountUserNameFound);
+                }                                
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
                 return Result<AccountUser>.Ok();
             }
             catch (Exception ex)
-            {
-                Log.Error("Message: Error to update a AccountUser " + ex + "");
+            {                
+                Log.Error(LogMessages.UpdatingErrorAccountUser(ex));
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred");
+                throw new InvalidOperationException("Message: Error to update a AccountUser");
             }
             finally
-            {
-                Log.Error("Message: Upated with success AccountUser");
+            {                
+                Log.Error(LogMessages.UpdatingSuccessAccountUser());
                 transaction.Dispose();
             }
         }
@@ -108,25 +102,23 @@ namespace TestWebBackEndDeveloper.Application.Services
             {
                 var accountUserToDelete = await _repositoryUoW.AccountUserRepository.GetAccountUserByIdAsync(accountId);
 
-                if (accountUserToDelete == null)
-                {
-                    Log.Error("Message: Error to delete to AccountUser");
-                    throw new ArgumentException("AccountUser not found with the given ID.");
-                }
+                ValidateAccountUserExistsForAction(accountUserToDelete, "delete");
 
-                _repositoryUoW.AccountUserRepository.DeleteAccountUserAsync(accountUserToDelete);
+                if (accountUserToDelete is not null)
+                    _repositoryUoW.AccountUserRepository.DeleteAccountUserAsync(accountUserToDelete);
+                
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
             }
             catch (Exception ex)
             {
-                Log.Error("Message: Error to delete a AccountUser " + ex + "");
+                Log.Error(LogMessages.DeleteAccountUserError(ex));
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred");
+                throw new InvalidOperationException("Message: Error to delete a AccountUser");
             }
             finally
             {
-                Log.Error("Message: Delete with success AccountUser");
+                Log.Error(LogMessages.DeleteAccountUserSuccess());
                 transaction.Dispose();
             }
         }
@@ -142,13 +134,13 @@ namespace TestWebBackEndDeveloper.Application.Services
             }
             catch (Exception ex)
             {
-                Log.Error("Message: Error to loading the list AccountUser " + ex + "");
+                Log.Error(LogMessages.GetAllAccountUserError(ex));
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred");
+                throw new InvalidOperationException("Message: Error to loading the list AccountUser");
             }
             finally
             {
-                Log.Error("Message: GetAll with success AccountUser");
+                Log.Error(LogMessages.GetAllAccountUserSuccess());
                 transaction.Dispose();
             }
         }
@@ -161,6 +153,32 @@ namespace TestWebBackEndDeveloper.Application.Services
                 string errorMessage = string.Join(" ", requestValidator.Errors.Select(e => e.ErrorMessage));
                 errorMessage = errorMessage.Replace(Environment.NewLine, "");
                 return Result<AccountUser>.Error(errorMessage);
+            }
+
+            return Result<AccountUser>.Ok();
+        }
+
+        private void ValidateAccountUserExistsForAction(AccountUser? accountUser, string action)
+        {
+            if (accountUser is null)
+            {
+                Log.Error($"Message: Error to {action} AccountUser");
+                throw new InvalidOperationException($"AccountUser does not found for {action} action!");
+            }
+        }
+
+        private Result<AccountUser> ValidateAccountUser(AccountUser accountUser, Result<AccountUser> isValidAccountUser)
+        {
+            if (!isValidAccountUser.Success)
+            {
+                Log.Error(LogMessages.InvalidAccountUserInputs());
+                return Result<AccountUser>.Error(isValidAccountUser.Message);
+            }
+
+            if (string.IsNullOrWhiteSpace(accountUser.Name))
+            {
+                Log.Error(LogMessages.NullOrEmptyAccountUserName());
+                return Result<AccountUser>.Error("Message: The Name field cannot be null, empty, or whitespace.");
             }
 
             return Result<AccountUser>.Ok();

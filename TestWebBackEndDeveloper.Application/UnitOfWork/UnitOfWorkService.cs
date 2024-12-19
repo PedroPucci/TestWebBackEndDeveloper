@@ -21,7 +21,7 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
         {
             get
             {
-                if (accountService == null)
+                if (accountService is null)
                 {
                     accountService = new AccountUserService(_repositoryUoW);
                 }
@@ -33,7 +33,7 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
         {
             get
             {
-                if (depositService == null)
+                if (depositService is null)
                 {
                     depositService = new DepositService(_repositoryUoW);
                 }
@@ -45,7 +45,7 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
         {
             get
             {
-                if (balanceService == null)
+                if (balanceService is null)
                 {
                     balanceService = new BalanceService(_repositoryUoW);
                 }
@@ -57,7 +57,7 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
         {
             get
             {
-                if (quotationService == null)
+                if (quotationService is null)
                 {
                     quotationService = new QuotationService(_repositoryUoW);
                 }
@@ -69,7 +69,7 @@ namespace TestWebBackEndDeveloper.Application.UnitOfWork
         {
             get
             {
-                if (purchaseService == null)
+                if (purchaseService is null)
                 {
                     purchaseService = new PurchaseService(_repositoryUoW);
                 }

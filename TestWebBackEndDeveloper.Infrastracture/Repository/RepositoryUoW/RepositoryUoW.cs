@@ -25,7 +25,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         {
             get
             {
-                if (_accountUserRepository == null)
+                if (_accountUserRepository is null)
                 {
                     _accountUserRepository = new AccountUserRepository(_context);
                 }
@@ -37,7 +37,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         {
             get
             {
-                if (_depositRepository == null)
+                if (_depositRepository is null)
                 {
                     _depositRepository = new DepositRepository(_context);
                 }
@@ -49,7 +49,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         {
             get
             {
-                if (_balanceRepository == null)
+                if (_balanceRepository is null)
                 {
                     _balanceRepository = new BalanceRepository(_context);
                 }
@@ -61,7 +61,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         {
             get
             {
-                if (_quotationRepository == null)
+                if (_quotationRepository is null)
                 {
                     _quotationRepository = new QuotationRepository(_context);
                 }
@@ -73,7 +73,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.RepositoryUoW
         {
             get
             {
-                if (_purchaseRepository == null)
+                if (_purchaseRepository is null)
                 {
                     _purchaseRepository = new PurchaseRepository(_context);
                 }

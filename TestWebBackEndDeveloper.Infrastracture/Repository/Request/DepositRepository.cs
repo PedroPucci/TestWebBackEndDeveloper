@@ -16,7 +16,7 @@ namespace TestWebBackEndDeveloper.Infrastracture.Repository.Request
 
         public async Task<Deposit> AddDepositAsync(Deposit deposit)
         {
-            if (deposit == null)
+            if (deposit is null)
                 throw new ArgumentNullException(nameof(deposit), "Deposit cannot be null");
 
             var result = await _context.Deposit.AddAsync(deposit);
