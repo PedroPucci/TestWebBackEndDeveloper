@@ -31,6 +31,7 @@ namespace TestWebBackEndDeveloper.Application.Services
                 }
 
                 accountUser.ModificationDate = DateTime.UtcNow;
+                accountUser.Email = accountUser.Email?.Trim().ToLower();
                 var result = await _repositoryUoW.AccountUserRepository.AddAccountUserAsync(accountUser);
 
                 await _repositoryUoW.SaveAsync();

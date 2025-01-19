@@ -20,8 +20,10 @@ namespace TestWebBackEndDeveloper.Shared.Validator
                     .WithMessage(AcountUserErrors.AccountUser_Error_EmailCanNotBeNullOrEmpty.Description())
                 .MinimumLength(4)
                     .WithMessage(AcountUserErrors.AccountUser_Error_EmailLenghtLessFour.Description())
-                .EmailAddress()
-                    .WithMessage(AcountUserErrors.AccountUser_Error_InvalidEmailFormat.Description());
+                .Matches(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                        .WithMessage(AcountUserErrors.AccountUser_Error_InvalidEmailFormat.Description());
+            //.EmailAddress()
+            //    .WithMessage(AcountUserErrors.AccountUser_Error_InvalidEmailFormat.Description());
 
             RuleFor(p => p.Password)
                 .NotEmpty()
